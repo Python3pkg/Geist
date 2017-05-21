@@ -1,9 +1,9 @@
-from __future__ import division, absolute_import, print_function
+
 import os
 import sys
 import json
 import base64
-import StringIO
+import io
 import wrapt
 from PIL import Image
 from . import get_platform_backend
@@ -119,7 +119,7 @@ class PlaybackBackend(object):
         location_list = LocationList()
         for b64_location in b64_locations:
             base64_png = b64_location['base64_png']
-            string_file = StringIO.StringIO(
+            string_file = io.StringIO(
                 base64.b64decode(base64_png)
             )
             x, y, w, h = (
@@ -191,7 +191,7 @@ class RecordingBackend(object):
     def _write_capture_locations(self, locations):
         b64_locations = []
         for location in locations:
-            string_file = StringIO.StringIO()
+            string_file = io.StringIO()
             Image.fromarray(location.image).save(string_file, 'png')
             b64_png = base64.b64encode(string_file.getvalue())
             b64_locations.append({

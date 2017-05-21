@@ -6,7 +6,7 @@ Use the viewer object to capture images and test finders in an interactive ipyth
 """
 
 try:
-    get_ipython().magic(u'pylab')
+    get_ipython().magic('pylab')
 except (NameError,):
     pass
 

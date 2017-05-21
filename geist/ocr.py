@@ -1,4 +1,4 @@
-from __future__ import division, absolute_import, print_function
+
 import numpy
 from PIL import Image
 import math
@@ -62,7 +62,7 @@ def binary_span(bin1d):
     padded = numpy.hstack(([False], bin1d, [False])).astype(numpy.int8)
     diff = padded[1:] - padded[:-1]
     starts, ends = numpy.where(diff == 1), numpy.where(diff == -1)
-    return zip(starts[0], ends[0])
+    return list(zip(starts[0], ends[0]))
 
 
 def local_minima_character_segmentation(
@@ -102,7 +102,7 @@ def max_threshold_character_segmentation(arr, global_max_threshold=0.7):
         min_start, min_stop = x_min_locations[0], x_min_locations[-1]
         starts.append(start + min_start)
         ends.append(start + min_stop + 1)
-    return zip(ends, starts[1:])
+    return list(zip(ends, starts[1:]))
 
 
 def threshold_character_segmentation(arr, theshhold):
@@ -127,7 +127,7 @@ def max_vertical_density_threshold_character_segmentation(
         min_start, min_stop = x_min_locations[0], x_min_locations[-1]
         starts.append(start + min_start)
         ends.append(start + min_stop + 1)
-    return zip(ends, starts[1:])
+    return list(zip(ends, starts[1:]))
 
 
 def max_pixel_and_max_vertical_threshold_segmentation(
@@ -153,7 +153,7 @@ def max_pixel_and_max_vertical_threshold_segmentation(
         min_start, min_stop = x_min_locations[0], x_min_locations[-1]
         starts.append(start + min_start)
         ends.append(start + min_stop + 1)
-    return zip(ends, starts[1:])
+    return list(zip(ends, starts[1:]))
 
 
 def empty_span_line_segmentation(arr):

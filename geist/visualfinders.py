@@ -1,4 +1,4 @@
-from __future__ import division, absolute_import, print_function
+
 
 from .finders import Location
 from .vision import best_convolution, grey_scale, find_edges

@@ -125,7 +125,7 @@ def match_positions(shape, list_of_coords):
         final_positions = [(int(np.mean(coords[i]['x'])),int(np.mean(coords[i]['y']))) for i in range(len(coords))]
         return final_positions
     except IndexError:
-        print 'no matches found'
+        print('no matches found')
         # this error occurs if no matches are found
         return []
 
@@ -134,9 +134,9 @@ def match_positions(shape, list_of_coords):
 def post_process(image, template, list_of_coords):
     h, w = template.shape
     for x, y in list_of_coords:
-        print x-h + 1, y-w + 1
+        print(x-h + 1, y-w + 1)
         sub_image = image[x-h + 1:x + 1, y-w + 1:y + 1]
-        print sub_image.shape, template.shape, x, y
+        print(sub_image.shape, template.shape, x, y)
         if not np.allclose(template, sub_image):
             list_of_coords.remove((x,y))
     return list_of_coords

@@ -14,7 +14,7 @@ class GeistFakeBackend(object):
                 [Location(0, 0, w=w, h=h, image=self.image)]
             )
         else:
-            if isinstance(image, basestring):
+            if isinstance(image, str):
                 image = np.load(image)
             self.image = image
             h, w, _ = image.shape

@@ -1,4 +1,4 @@
-from __future__ import division, absolute_import, print_function
+
 import os
 import unittest
 from geist import Location, GUI, LocationList

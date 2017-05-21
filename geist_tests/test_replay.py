@@ -1,4 +1,4 @@
-from __future__ import division, absolute_import, print_function
+
 import os
 import unittest
 import mock
@@ -18,7 +18,7 @@ class EnvironmentContext(object):
         self._env = env
 
     def __enter__(self):
-        self._old_env = dict((k, os.environ[k]) for k in self._env.keys()
+        self._old_env = dict((k, os.environ[k]) for k in list(self._env.keys())
                              if k in os.environ)
         os.environ.update(self._env)
 

@@ -1,4 +1,4 @@
-from __future__ import division
+
 from itertools import islice
 import numpy as np
 

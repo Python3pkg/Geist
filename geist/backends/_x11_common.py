@@ -1,4 +1,4 @@
-from __future__ import division, absolute_import, print_function
+
 
 from ooxcb.protocol import (
     xtest,
@@ -38,7 +38,7 @@ class GeistXBase(object):
 
     KEY_NAME_TO_CODE = keysyms
     KEY_NAME_TO_CODE_IGNORE_CASE = {name.lower(): value
-                                    for name, value in keysyms.iteritems()}
+                                    for name, value in keysyms.items()}
 
     def __init__(self, **kwargs):
         display = kwargs.get('display', ':0')

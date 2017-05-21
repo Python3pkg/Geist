@@ -1,8 +1,9 @@
-from __future__ import division
+
 from numpy.fft import irfft2, rfft2
 import numpy
 import itertools
 import operator
+from functools import reduce
 
 
 def subimage(rect, image):
@@ -84,10 +85,10 @@ def best_convolution(bin_template, bin_image,
     max_hor_cells = iw // th
 
     # Try to work out how many times we can stack the image
-    usable_factors = {n: factors for n, factors in overlap_table.iteritems()
+    usable_factors = {n: factors for n, factors in overlap_table.items()
                       if ((template_sum + 1) ** (n)) < ACCURACY_LIMIT}
     overlap_options = [(factor, n // factor)
-                       for n, factors in usable_factors.iteritems()
+                       for n, factors in usable_factors.items()
                        for factor in factors
                        if (factor <= max_vert_cells and
                            n // factor <= max_hor_cells)]
@@ -494,7 +495,7 @@ def filter_greys_using_image(image, target):
         and with the same dimensions as target
 
     """
-    maskbase = numpy.array(range(256), dtype=numpy.uint8)
+    maskbase = numpy.array(list(range(256)), dtype=numpy.uint8)
     mask = numpy.where(numpy.in1d(maskbase, numpy.unique(image)), maskbase, 0)
     return mask[target]
 
@@ -506,8 +507,8 @@ def correlation_coefficient_normed(template, image):
     template_distance = template - (template.sum() / template_size)
     corr_num = numpy.zeros((H, W), numpy.float64)
     corr_denum = numpy.zeros((H, W), numpy.float64)
-    for y in xrange(H):
-        for x in xrange(W):
+    for y in range(H):
+        for x in range(W):
             image_in_template_area = image[y:y + h, x:x + w]
             image_distance_of_template_area = (
                 image_in_template_area - (
@@ -526,5 +527,5 @@ def correlation_coefficient_normed(template, image):
                 (template_distance ** 2).sum() *
                 (image_distance_of_template_area ** 2).sum()
             )
-        print y
+        print(y)
     return corr_num / corr_denum
